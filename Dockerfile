@@ -1,7 +1,7 @@
 ARG ARCH="amd64"
 ARG OS="linux"
 #FROM quay.io/prometheus/busybox-${OS}-${ARCH}:latest
-FROM centos:7
+FROM 345280441424.dkr.ecr.ap-south-1.amazonaws.com/ark_base:latest
 LABEL maintainer="Armedia, LLC"
 
 ARG ARCH="amd64"
