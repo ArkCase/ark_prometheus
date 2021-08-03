@@ -8,60 +8,58 @@ ARG SRC="${PKG}-${VER}.${OS}-${ARCH}"
 ARG UID="nobody"
 ARG GID="nobody"
 
-LABEL   ORG="Armedia LLC" \
-        APP="Prometheus" \
-        VERSION="${VER}" \
-        IMAGE_SOURCE="https://github.com/ArkCase/ark_prometheus" \
-        MAINTAINER="Armedia LLC"
+LABEL ORG="Armedia LLC"
+LABEL MAINTAINER="Armedia LLC"
+LABEL APP="Prometheus"
+LABEL VERSION="${VER}"
+LABEL IMAGE_SOURCE="https://github.com/ArkCase/ark_prometheus"
 
 # Modify to fetch from S3 ...
 RUN curl \
         -L "https://github.com/prometheus/${PKG}/releases/download/v${VER}/${SRC}.tar.gz" \
-        -o "package.tar.gz" && \
-    tar -xzvf "package.tar.gz" && \
-    mkdir -pv \
+        -o - | tar -xzvf -
+RUN mkdir -pv \
         "/app/data" \
         "/app/conf" \
-        "/usr/share/prometheus" && \
-    mv -vif \
+        "/usr/share/prometheus"
+RUN mv -vif \
         "${SRC}/LICENSE" \
-        "/LICENSE" && \
-    mv -vif \
+        "/LICENSE"
+RUN mv -vif \
         "${SRC}/NOTICE" \
-        "/NOTICE" && \
-    mv -vif \
+        "/NOTICE"
+RUN mv -vif \
         "${SRC}/prometheus" \
-        "/bin/prometheus" && \
-    mv -vif \
+        "/bin/prometheus"
+RUN mv -vif \
         "${SRC}/promtool" \
-        "/bin/promtool" && \
-    mv -vif \
+        "/bin/promtool"
+RUN mv -vif \
         "${SRC}/prometheus.yml" \
-        "/app/conf/prometheus.yml" && \
-    mv -vif \
+        "/app/conf/prometheus.yml"
+RUN mv -vif \
         "${SRC}/console_libraries/" \
-        "/usr/share/prometheus/" && \
-    mv -vif \
+        "/usr/share/prometheus/"
+RUN mv -vif \
         "${SRC}/consoles/" \
-        "/usr/share/prometheus/" && \
-    ln -sv \
+        "/usr/share/prometheus/"
+RUN ln -sv \
         "/usr/share/prometheus/console_libraries" \
-        "/app/conf" && \
-    ln -sv \
+        "/app/conf"
+RUN ln -sv \
         "/usr/share/prometheus/consoles" \
-        "/app/conf" && \
-    ln -sv \
+        "/app/conf"
+RUN ln -sv \
         "/app/conf" \
-        "/etc/prometheus" && \
-    chown -R "${UID}:${GID}" \
+        "/etc/prometheus"
+RUN chown -R "${UID}:${GID}" \
         "/app/data" \
-        "/app/conf" && \
-    chmod -R ug+rwX,o-rwx \
+        "/app/conf"
+RUN chmod -R ug+rwX,o-rwx \
         "/app/data" \
-        "/app/conf" && \
-    rm -rvf \
-        "${SRC}" \
-        "package.tar.gz"
+        "/app/conf"
+RUN rm -rvf \
+        "${SRC}"
 
 #COPY npm_licenses.tar.bz2    /npm_licenses.tar.bz2
 
