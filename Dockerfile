@@ -69,8 +69,8 @@ USER        ${UID}
 EXPOSE      9090
 VOLUME      [ "/app/data", "/app/conf" ]
 WORKDIR     /app/data
-CMD         [ "/bin/prometheus" \
-                  "--config.file=/app/conf/prometheus.yml", \
-                  "--storage.tsdb.path=/app/data", \
-                  "--web.console.libraries=/usr/share/prometheus/console_libraries", \
-                  "--web.console.templates=/usr/share/prometheus/consoles" ]
+ENTRYPOINT  [ "/bin/prometheus" ]
+CMD         [ "--config.file=/app/conf/prometheus.yml", \
+              "--storage.tsdb.path=/app/data", \
+              "--web.console.libraries=/usr/share/prometheus/console_libraries", \
+              "--web.console.templates=/usr/share/prometheus/consoles" ]
