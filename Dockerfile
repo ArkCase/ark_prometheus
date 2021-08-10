@@ -14,7 +14,7 @@ ARG UID="prometheus"
 # Some important labels
 #
 LABEL ORG="Armedia LLC"
-LABEL MAINTAINER="Devops Team <devops@armedia.com>"
+LABEL MAINTAINER="Armedia Devops Team <devops@armedia.com>"
 LABEL APP="Prometheus"
 LABEL VERSION="${VER}"
 LABEL IMAGE_SOURCE="https://github.com/ArkCase/ark_prometheus"
