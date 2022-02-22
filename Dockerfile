@@ -5,7 +5,7 @@ FROM 345280441424.dkr.ecr.ap-south-1.amazonaws.com/ark_base:latest
 #
 ARG ARCH="amd64"
 ARG OS="linux"
-ARG VER="2.28.1"
+ARG VER="2.33.3"
 ARG PKG="prometheus"
 ARG SRC="${PKG}-${VER}.${OS}-${ARCH}"
 ARG UID="471"
